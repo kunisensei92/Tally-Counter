@@ -29,12 +29,14 @@ class TallyCounterApp(rumps.App):
         self.count += 1
         self.count_menu_item.title = str(self.count)
         self.title = str(self.count)
+        self.save_count()
 
     @rumps.clicked('Reset')
     def reset(self, _):
         self.count = 0
         self.count_menu_item.title = str(self.count)
         self.title = str(self.count)
+        self.save_count()
 
     def edit_count(self, _):
         response = rumps.Window(
@@ -46,12 +48,12 @@ class TallyCounterApp(rumps.App):
             self.count = int(response.text)
             self.count_menu_item.title = str(self.count)
             self.title = str(self.count)
+            self.save_count()
         except ValueError:
             pass
 
     @rumps.clicked('Quit')
     def on_quit(self, _):
-        self.save_count()
         rumps.quit_application()
 
 if __name__ == '__main__':
